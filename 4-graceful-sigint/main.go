@@ -13,9 +13,35 @@
 
 package main
 
+import (
+	"fmt"
+	"os"
+	"os/signal"
+)
+
 func main() {
 	// Create a process
 	proc := MockProcess{}
+
+	go func() {
+		c := make(chan os.Signal, 1)
+		signal.Notify(c, os.Interrupt)
+		killCommandCount := 0
+		for sig := range c {
+			fmt.Println(killCommandCount)
+			if sig != os.Interrupt {
+				continue
+			}
+
+			if killCommandCount == 0 {
+				killCommandCount++
+				go proc.Stop()
+			} else if killCommandCount == 1 {
+				fmt.Println(1)
+				os.Exit(1)
+			}
+		}
+	}()
 
 	// Run the process (blocking)
 	proc.Run()
