@@ -47,3 +47,7 @@ Found 3 data race(s)
 
 * [https://www.mailgun.com/blog/golangs-superior-cache-solution-memcached-redis/](https://www.mailgun.com/blog/golangs-superior-cache-solution-memcached-redis/)
 * [https://allegro.tech/2016/03/writing-fast-cache-service-in-go.html](https://allegro.tech/2016/03/writing-fast-cache-service-in-go.html)
+
+### Personal note
+
+* Tests pass in 4 seconds, so i guess the 30 second requirement is fulfilled, even if i didn't do any optimizing 
